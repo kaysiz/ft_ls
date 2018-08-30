@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 15:22:25 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/08/30 15:27:34 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/08/22 15:17:54 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/08/23 11:15:06 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include "./printf/ft_printf.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av)
+void	ft_putchar(char c)
 {
-	if (ac == 1)
-		write(1, "ls\n", 3);
-	else
-		ft_printf("%s\n", av[1]);
-	return(0);	
+	write(1, &c, 1);
+	g_chars++;
 }

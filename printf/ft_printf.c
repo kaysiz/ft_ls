@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 15:22:25 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/08/30 15:27:34 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/08/22 15:16:40 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/08/23 11:39:18 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include "./printf/ft_printf.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av)
+int		ft_printf(const char *format, ...)
 {
-	if (ac == 1)
-		write(1, "ls\n", 3);
-	else
-		ft_printf("%s\n", av[1]);
-	return(0);	
+	int		i;
+	int		j;
+	va_list	args;
+
+	i = 0;
+	j = 0;
+	g_chars = 0;
+	va_start(args, format);
+	while (format[j] != '\0')
+	{
+		if (format[j] == '%')
+		{
+			j++;
+			ft_conversion(format[j], args);
+		}
+		else
+		{
+			ft_putchar(format[j]);
+		}
+		j++;
+	}
+	va_end(args);
+	return (g_chars);
 }
