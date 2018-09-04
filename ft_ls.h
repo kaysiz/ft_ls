@@ -13,18 +13,26 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+struct flags
+{
+    int using_a;
+    int using_l;
+    int using_r;
+    int using_R;
+    int using_t;
+};
 
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include "./printf/ft_printf.h"
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
 
-# include <getopt.h>
-# include <grp.h>
-# include <pwd.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <strings.h>
-# include <sysexits.h>
-# include <time.h>
-# include <unistd.h>
+int	ft_strcmp(const char *str1, const char *str2);
+void    ft_al(char c, char *d);
+void print_permissions(mode_t mode);
 
 #endif

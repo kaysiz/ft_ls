@@ -1,67 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_handle_dirs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/23 16:31:44 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/08/30 12:06:42 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/09/04 16:26:29 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/09/04 16:26:32 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include "./printf/ft_printf.h"
-#include <pwd.h>
-#include <grp.h>
-#include <time.h>
 
-void ft_a(DIR *path)
+#include "ft_ls.h"
+
+void ft_handle_dirs(char *str)
 {
-    struct dirent *dp;
-
-    // Unable to open directory stream
-    if (!path) 
-        return; 
-
-    while ((dp = readdir(path)) != NULL)
-    {
-        printf("%s\n", dp->d_name);
-    }
-
-    // Close directory stream
-    closedir(path);
-}
-
-void ft_l(DIR *path)
-{
-    struct dirent *dp;
-
-    // Unable to open directory stream
-    if (!path) 
-        return; 
-
-    while ((dp = readdir(path)) != NULL)
-    {
-        printf("%s\n", dp->d_name);
-    }
-
-    // Close directory stream
-    closedir(path);
-}
-
-
-int	main(int ac, char **av)
-{
-	 DIR *dir;
-	// struct dirent *f_name;
-	// struct stat fileStat;
-	// struct group *grp;
-	// struct passwd *pwd;
-	// char time[50];
+    DIR *dir;
+	struct dirent *f_name;
+	struct stat fileStat;
+	struct group *grp;
+	struct passwd *pwd;
+	char time[50];
 
 	if (ac == 1)
 		dir = opendir(".");
@@ -97,5 +56,4 @@ int	main(int ac, char **av)
 	// 		ft_printf("%s\n", f_name->d_name);
 	// 	}
 	// }
-	return(0);
 }
