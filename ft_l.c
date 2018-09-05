@@ -35,7 +35,7 @@ void    ft_l(char *d)
 	{
 		dir = opendir(d);
 		if (dir == NULL)
-			exit(1);
+			exit(1);   
 		while ((f_name=readdir(dir)) != NULL)
 		{
 			
@@ -58,5 +58,18 @@ void    ft_l(char *d)
 		// Close directory stream
 		closedir(dir);
 	}else
-		ft_printf(d);
+    {
+        stat(d,&fileStat);
+        grp = getgrgid(fileStat.st_gid);
+        pwd = getpwuid(fileStat.st_uid);
+        print_permissions(fileStat.st_mode);
+        ft_printf("\t");
+        ft_printf("%u\t", ((long )fileStat.st_nlink));
+        ft_printf("%s\t", pwd->pw_name);
+        ft_printf("%s\t", grp->gr_name);
+        ft_printf("%u\t", fileStat.st_size);
+        strftime(time, 50, "%e %b %H:%M", localtime(&fileStat.st_mtime));
+        ft_printf("%s\t", time);
+        ft_printf("%s\n", d);
+    }
 }

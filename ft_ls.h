@@ -13,15 +13,6 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-struct flags
-{
-    int using_a;
-    int using_l;
-    int using_r;
-    int using_R;
-    int using_t;
-};
-
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -31,8 +22,16 @@ struct flags
 #include <grp.h>
 #include <time.h>
 
-int	ft_strcmp(const char *str1, const char *str2);
+int     g_check;
+
+int	    ft_strcmp(const char *str1, const char *str2);
 void    ft_al(char c, char *d);
-void print_permissions(mode_t mode);
+void    ft_l(char *d);
+void    ft_noflags(char *d);
+void    ft_r(char *d);
+void    print_permissions(mode_t mode);
+size_t	ft_strlen(const char *str);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char	*ft_strdup(const char *s);
 
 #endif

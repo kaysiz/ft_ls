@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_r.c                                             :+:      :+:    :+:   */
+/*   ft_noflags.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/04 16:27:18 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/04 16:27:20 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/09/05 12:17:24 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/09/05 12:17:27 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ft_ls.h"
 
-void    ft_r(char *d)
+void    ft_noflags(char *d)
 {
     DIR *dir;
 	struct dirent *f_name;
 	struct stat fileStat;
 	int is_dir = 0;
-    int i;
-    char **r_list;
 
-    i = 0;
-    r_list = (char **)malloc(sizeof(char *) * (1024));
 	//check if its a directory
 	if (lstat(d, &fileStat) < 0)
     {
         perror(d);
-        return;
+        exit(1);
     }
 
     (fileStat.st_mode & S_IFDIR) ? (is_dir = 1) : (is_dir = 0);
@@ -37,26 +34,19 @@ void    ft_r(char *d)
 		dir = opendir(d);
 		if (dir == NULL)
 			exit(1);
+        ft_printf("\n%s:\n", d);
 		while ((f_name=readdir(dir)) != NULL)
 		{
 			
             if (f_name->d_name[0] != '.')
             {
-                r_list[i] = ft_strdup(f_name->d_name);
-                i++;
+                ft_printf("%s\n", f_name->d_name);
             }
 		}
-        r_list[i] = NULL;
-        while (--i >= 0)
-        {
-            ft_printf("%s\n", r_list[i]);
-            free(r_list[i]);
-        }
-        free(r_list);
 		// Close directory stream
 		closedir(dir);
 	}else
-    {
-        ft_printf("%s\n", d);
-    }
+		{
+            ft_printf("%s\n", d);
+        }
 }

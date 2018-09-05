@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_dirs.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/04 16:26:29 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/04 16:26:32 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/21 08:33:57 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/06/05 12:23:48 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_ls.h"
 
-void ft_handle_dirs(char *str)
+size_t	ft_strlen(const char *str)
 {
-    ft_printf("nothing");
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

@@ -14,38 +14,85 @@
 
 int	main(int ac, char **av)
 {
-	int i = 1;
-
+	int i;
+	g_check = 0;
 	if (ac == 1)
 		ft_al(' ', ".");
-	else if(ac == 2)
+	else
 	{
 		if (av[1][0] == '-')
 		{
-			while (av[1][i])
+			if(ft_strcmp(av[1], "-l") == 0)
 			{
-				if(ft_strcmp(av[1], "-l") == 0)
-					//handle the -l flag
+				//handle the -l flag
+				if (ac > 2)
+				{
+					i = 2;
+					while(i < ac)
+					{
+						ft_l(av[i]);
+						i++;
+					}
+				}else
+				{
 					ft_l(".");
-				else if(ft_strcmp(av[1], "-a") == 0)
-					//handle the -a flag
-					ft_al('a', ".");
-				else if(ft_strcmp(av[1], "-t") == 0)
-					//handle the -t flag
-					ft_printf("Display time\n");
-				else if(ft_strcmp(av[1], "-r") == 0)
-					//handle the -r flag
-					ft_printf("Display reverse\n");
-				else if(ft_strcmp(av[1], "-R") == 0)
-					//handle the -R flag
-					ft_printf("Recursive\n");
-				else
-					ft_printf(av[1]);
+				}
+			}
+			else if(ft_strcmp(av[1], "-a") == 0)
+			{
+				//handle the -a flag
+				if (ac > 2)
+				{
+					i = 2;
+					while(i < ac)
+					{
+						ft_al('a',av[i]);
+						i++;
+					}
+				}else
+				{
+					ft_al('a',".");
+				}
+			}
+			else if(ft_strcmp(av[1], "-t") == 0)
+			{
+				//handle the -t flag
+				ft_printf("Display time\n");
+			}
+			else if(ft_strcmp(av[1], "-r") == 0)
+			{
+				//handle the -r flag
+				if (ac > 2)
+				{
+					i = 2;
+					while(i < ac)
+					{
+						ft_r(av[i]);
+						i++;
+					}
+				}else
+					ft_r(".");
+			}
+			else if(ft_strcmp(av[1], "-R") == 0)
+			{
+				//handle the -R flag
+				ft_printf("Recursive\n");
+			}
+			else
+			{
+				ft_printf("ft_ls: illegal option -- %c\n",av[1][1]);
+				ft_printf("usage: ft_ls [-Ralrt] [file ...]");
+			}
+		}
+		else	
+		{
+			i = 1;
+			while (i < ac)
+			{
+				ft_noflags(av[i]);
 				i++;
 			}
 		}
-		else
-			ft_al(' ', av[1]);
 	}
 	return(0);	
 }
