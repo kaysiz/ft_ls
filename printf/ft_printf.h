@@ -21,7 +21,7 @@
 
 int		g_chars;
 
-void	ft_putchar(char c);
+void    ft_putchar(char c);
 void	ft_putwchar(wchar_t c);
 void	ft_putstr(char *s);
 void	ft_putwstr(wchar_t *str);
@@ -39,4 +39,8 @@ void	ft_print(char c, va_list arg);
 void	ft_conversion(char c, va_list va);
 int		ft_check(char c);
 int		ft_printf(const char *format, ...);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *str);
+int	    ft_strcmp(const char *str1, const char *str2);
+char	*ft_strdup(const char *s);
 #endif

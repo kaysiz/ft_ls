@@ -10,43 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_ls.h"
 
-void    ft_noflags(char *d)
+void	ft_noflags(char *d)
 {
-    DIR *dir;
-	struct dirent *f_name;
-	struct stat fileStat;
-	int is_dir = 0;
+	DIR				*dir;
+	struct dirent	*f_name;
+	struct stat		stats;
+	int				is_dir;
 
-	//check if its a directory
-	if (lstat(d, &fileStat) < 0)
-    {
-        perror(d);
-        exit(1);
-    }
-
-    (fileStat.st_mode & S_IFDIR) ? (is_dir = 1) : (is_dir = 0);
-
-	if(is_dir)
+	if (lstat(d, &stats) < 0)
+	{
+		perror(d);
+		exit(1);
+	}
+	is_dir = (stats.st_mode & S_IFDIR) ? 1 : 0;
+	if (is_dir)
 	{
 		dir = opendir(d);
 		if (dir == NULL)
 			exit(1);
-        ft_printf("\n%s:\n", d);
-		while ((f_name=readdir(dir)) != NULL)
+		while ((f_name = readdir(dir)) != NULL)
 		{
-			
-            if (f_name->d_name[0] != '.')
-            {
-                ft_printf("%s\n", f_name->d_name);
-            }
+			if (f_name->d_name[0] != '.')
+				ft_printf("%s\n", f_name->d_name);
 		}
-		// Close directory stream
 		closedir(dir);
-	}else
-		{
-            ft_printf("%s\n", d);
-        }
+	}
+	else
+		ft_printf("%s\n", d);
 }

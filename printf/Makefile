@@ -21,7 +21,11 @@ SRC =	ft_check.c \
 		ft_putchar.c \
 		ft_putnbr.c \
 		ft_putstr.c \
-		ft_putwstr.c 
+		ft_putwstr.c \
+		ft_strjoin.c \
+		ft_strcmp.c \
+		ft_strlen.c \
+		ft_strdup.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -14,6 +14,9 @@
 
 void print_permissions(mode_t mode)
 {
+    if (S_ISLNK(mode))
+        ft_printf((S_ISLNK(mode)) ? "l" : "d");
+    else
     ft_printf((S_ISDIR(mode)) ? "d" : "-");
     ft_printf((mode & S_IRUSR) ? "r" : "-");
     ft_printf((mode & S_IWUSR) ? "w" : "-");
