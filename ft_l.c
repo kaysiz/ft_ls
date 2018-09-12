@@ -18,6 +18,9 @@ static void	print_dir_stats(char *d, char *str)
 	struct group	*grp;
 	struct passwd	*pwd;
 	char			time[50];
+	char 			*buf;
+    size_t 			nbytes;
+	size_t 			bufsiz;
 
 	lstat(ft_strjoin(ft_strjoin(d, "/"), str), &stats);
 	grp = getgrgid(stats.st_gid);
@@ -30,7 +33,29 @@ static void	print_dir_stats(char *d, char *str)
 	ft_printf("%u\t", stats.st_size);
 	strftime(time, 50, "%e %b %H:%M", localtime(&stats.st_mtime));
 	ft_printf("%s\t", time);
-	ft_printf("%s\n", str);
+	if (S_ISLNK(stats.st_mode))
+	{
+		bufsiz = stats.st_size + 1;
+		if (stats.st_size == 0)
+               bufsiz = 0;
+
+           buf = malloc(bufsiz);
+           if (buf == NULL) {
+               perror("malloc");
+               exit(EXIT_FAILURE);
+           }
+
+           nbytes = readlink(ft_strjoin(ft_strjoin(d, "/"), str), buf, bufsiz);
+           if (nbytes == (unsigned long)-1) {
+               perror("readlink");
+               exit(EXIT_FAILURE);
+           }
+
+           ft_printf("%s -> %s\n", str, buf);
+	}
+	else
+		ft_printf("%s\n", str);
+	
 	g_links += (long)stats.st_blocks;
 }
 
