@@ -15,8 +15,14 @@
 void	ft_rec(char *path)
 {
 	DIR				*dir;
+	struct stat		stats;
 	struct dirent	*ptr;
 
+	if (lstat(path, &stats) < 0)
+	{
+		perror(path);
+		return ;
+	}
 	dir = opendir(path);
 	while ((ptr = readdir(dir)) != NULL)
 	{

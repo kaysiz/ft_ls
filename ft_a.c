@@ -46,7 +46,10 @@ void		ft_a(char *d)
 	int				is_dir;
 
 	if (lstat(d, &stats) < 0)
+	{
 		perror(d);
+		return ;
+	}
 	is_dir = (stats.st_mode & S_IFDIR) ? 1 : 0;
 	if (is_dir)
 		ft_print_dir(d);

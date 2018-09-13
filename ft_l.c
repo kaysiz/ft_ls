@@ -88,7 +88,10 @@ void	ft_l(char *d)
 	struct stat		stats;
 
 	if (lstat(d, &stats) < 0)
+	{
 		perror(d);
+		return ;
+	}
 	if (stats.st_mode & S_IFDIR)
 		ft_print_dir_l(d);
 	else
