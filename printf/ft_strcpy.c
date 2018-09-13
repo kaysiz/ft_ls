@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rec.c                                           :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/04 16:27:52 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/13 16:58:56 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/23 09:49:19 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/23 16:17:35 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "ft_printf.h"
 
-void	ft_rec(char *path)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	DIR				*dir;
-	struct dirent	*ptr;
+	int	i;
 
-	dir = opendir(path);
-	while ((ptr = readdir(dir)) != NULL)
+	i = 0;
+	while (src[i] != '\0')
 	{
-		if (ptr->d_name[0] != '.')
-		{
-			if (ptr->d_type & DT_DIR)
-			{
-				printf("\n./%s: \n", ptr->d_name);
-				ft_rec(ptr->d_name);
-			}
-			else
-				printf("%s\n", ptr->d_name);
-		}
+		dest[i] = src[i];
+		i++;
 	}
+	dest[i] = '\0';
+	return (dest);
 }

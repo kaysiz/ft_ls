@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_r.c                                             :+:      :+:    :+:   */
+/*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/04 16:27:18 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/08 14:43:23 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/09/13 17:40:30 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/09/13 17:40:32 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	ft_print_dir(char *d)
+void		ft_print_dir_l(char *d)
 {
 	DIR				*dir;
 	struct dirent	*f_name;
-	int				i;
+	struct stat		stats;
 	char			**r_list;
+	int				i;
 
 	i = 0;
 	r_list = (char **)malloc(sizeof(char *) * (1024));
@@ -27,32 +28,14 @@ static void	ft_print_dir(char *d)
 	while ((f_name = readdir(dir)) != NULL)
 	{
 		if (f_name->d_name[0] != '.')
+		{
+			lstat(ft_strjoin(ft_strjoin(d, "/"), f_name->d_name), &stats);
 			r_list[i++] = ft_strdup(f_name->d_name);
+			g_links += (long)stats.st_blocks;
+		}
 	}
-	r_list[i] = NULL;
-	ft_sort(r_list);
-	while (--i >= 0)
-	{
-		ft_printf("%s\n", r_list[i]);
-		free(r_list[i]);
-	}
-	free(r_list);
 	closedir(dir);
-}
-
-void		ft_r(char *d)
-{
-	struct stat stats;
-	int			is_dir;
-
-	if (lstat(d, &stats) < 0)
-	{
-		perror(d);
-		return ;
-	}
-	is_dir = (stats.st_mode & S_IFDIR) ? 1 : 0;
-	if (is_dir)
-		ft_print_dir(d);
-	else
-		ft_printf("%s\n", d);
+	ft_printf("total   %d\n", g_links);
+	ft_print_list(d, r_list, i);
+	free(r_list);
 }

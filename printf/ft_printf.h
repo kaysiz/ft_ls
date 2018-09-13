@@ -43,4 +43,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 int	    ft_strcmp(const char *str1, const char *str2);
 char	*ft_strdup(const char *s);
+char	*ft_strcpy(char *dest, const char *src);
 #endif

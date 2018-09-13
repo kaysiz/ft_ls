@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rec.c                                           :+:      :+:    :+:   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/04 16:27:52 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/13 16:58:56 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/09/13 08:00:40 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/09/13 17:11:18 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_rec(char *path)
+void	ft_sort(char **str)
 {
-	DIR				*dir;
-	struct dirent	*ptr;
+	int		n;
+	int		j;
+	int		i;
+	char	*temp;
 
-	dir = opendir(path);
-	while ((ptr = readdir(dir)) != NULL)
+	n = 0;
+	j = 0;
+	while (str[n])
+		n++;
+	temp = (char *)malloc(sizeof(char *) * n);
+	while (j < n - 1)
 	{
-		if (ptr->d_name[0] != '.')
+		i = j + 1;
+		while (i < n)
 		{
-			if (ptr->d_type & DT_DIR)
+			if (ft_strcmp(str[j], str[i]) > 0)
 			{
-				printf("\n./%s: \n", ptr->d_name);
-				ft_rec(ptr->d_name);
+				ft_strcpy(temp, str[j]);
+				ft_strcpy(str[j], str[i]);
+				ft_strcpy(str[i], temp);
 			}
-			else
-				printf("%s\n", ptr->d_name);
+			i++;
 		}
+		j++;
 	}
 }

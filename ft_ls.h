@@ -29,6 +29,12 @@ void	ft_r(char *d);
 void	print_permissions(mode_t mode);
 void	ft_rec(char *path);
 void	handle_flags(int ac, char **av);
+void	ft_sort(char **str);
+void	ft_islink(char *d, char *str);
+void	print_dir_stats(char *d, char *str);
+void	print_f_stats(char *str);
+void	ft_print_list(char *d, char **r_list, int i);
+void	ft_print_dir_l(char *d);
 int		g_links;
 
 #endif

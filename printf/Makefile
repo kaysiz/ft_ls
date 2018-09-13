@@ -25,7 +25,8 @@ SRC =	ft_check.c \
 		ft_strjoin.c \
 		ft_strcmp.c \
 		ft_strlen.c \
-		ft_strdup.c
+		ft_strdup.c \
+		ft_strcpy.c
 
 OBJ = $(SRC:.c=.o)
 
