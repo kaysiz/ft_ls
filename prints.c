@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 15:45:43 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/09/13 17:13:10 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/09/13 18:16:44 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	print_permissions(mode_t mode)
 {
 	if (S_ISLNK(mode))
 		ft_printf((S_ISLNK(mode)) ? "l" : "d");
-	ft_printf((S_ISDIR(mode)) ? "d" : "-");
+	else
+		ft_printf((S_ISDIR(mode)) ? "d" : "-");
 	ft_printf((mode & S_IRUSR) ? "r" : "-");
 	ft_printf((mode & S_IWUSR) ? "w" : "-");
 	ft_printf((mode & S_IXUSR) ? "x" : "-");
